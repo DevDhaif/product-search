@@ -36,3 +36,23 @@ export async function getAllProducts(limit = 20) {
         return [];
     }
 }
+/**
+ * get a single product by ID
+ */
+export async function getProductById(id) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/products/${id}`);
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                return null;
+            }
+            throw new Error('Failed to fetch product');
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(`Error fetching product with id (${id}):`, error);
+        return null;
+    }
+}
