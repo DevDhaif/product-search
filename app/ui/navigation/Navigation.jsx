@@ -8,9 +8,9 @@ import { usePathname } from "next/navigation";
 function Navigation() {
     const pathName = usePathname();
     return (
-        <header className="">
+        <header className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm">
             <nav>
-                <ul className="container mx-auto flex py-8 gap-12 p-4 items-center">
+                <ul className="container mx-auto flex py-6 gap-12 p-4 items-center">
                     <li>
                         <Link href="/" className={pathName === "/" ? "text-blue-600" : "text-gray-600"}>
                             <Image src="/icons/nhc_dark.svg" alt="National Housing" width={48} height={48} />
