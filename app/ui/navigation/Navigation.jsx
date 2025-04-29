@@ -17,12 +17,12 @@ function Navigation() {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/products" className={pathName === "/products" ? "text-blue-600 font-bold" : "text-gray-600"}>
+                        <Link href="/products" className={`font-abel ${pathName === "/products" ? "text-blue-600 font-bold" : "text-gray-600 "}`}>
                             Products
                         </Link>
                     </li>
                     <li>
-                        <Link href="/about" className={pathName === "/about" ? "text-blue-600 font-bold" : "text-gray-600"}>
+                        <Link href="/about" className={`font-abel ${pathName === "/about" ? "text-blue-600 font-bold" : "text-gray-600 "}`}>
                             About
                         </Link>
                     </li>
