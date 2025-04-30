@@ -1,4 +1,4 @@
-import { searchProducts, getAllProducts } from '@/app/lib/api';
+import { searchProductsStatic, getAllProductsStatic } from '@/app/lib/api';
 import ProductsClientWrapper from '@/app/ui/Product/ProductsClientWrapper';
 
 export const metadata = {
@@ -11,8 +11,8 @@ export default async function ProductsPage({ searchParams }) {
     const query = params?.q || '';
 
     const data = query
-        ? await searchProducts(query)
-        : await getAllProducts(20);
+        ? await searchProductsStatic(query)
+        : await getAllProductsStatic(20);
 
     const products = data.products || [];
 

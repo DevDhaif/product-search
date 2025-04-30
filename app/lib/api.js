@@ -11,9 +11,10 @@ const getBaseUrl = () => {
 /**
  * search products by keyword
  */
-export async function searchProducts(query = '') {
-    const API_BASE_URL = getBaseUrl();
-    const response = await fetch(`${API_BASE_URL}/api/products/search?q=${encodeURIComponent(query)}`);
+export async function searchProductsStatic(query = '') {
+    const response = await fetch(`https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`, {
+        next: { revalidate: 3600 }
+    });
 
     if (!response.ok) {
         throw new Error('Failed to fetch products');
@@ -22,19 +23,6 @@ export async function searchProducts(query = '') {
     return response.json();
 }
 
-/**
- * get all products
- */
-export async function getAllProducts(limit = 20) {
-    const API_BASE_URL = getBaseUrl();
-    const response = await fetch(`${API_BASE_URL}/api/products?limit=${limit}`);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch products');
-    }
-
-    return response.json();
-}
 /**
  * get a single product by ID
  */
@@ -67,7 +55,7 @@ export async function getAllProductsStatic(limit = 20) {
 export async function getProductByIdStatic(id) {
     try {
         const response = await fetch(`https://dummyjson.com/products/${id}`, {
-        next: { revalidate: 3600 }
+            next: { revalidate: 3600 }
         });
 
         if (!response.ok) {
