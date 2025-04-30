@@ -1,15 +1,28 @@
-import { Suspense } from 'react';
-import ProductsContent from '../ui/Product/ProductsContent';
+import { searchProducts, getAllProducts } from '@/app/lib/api';
+import ProductsClientWrapper from '@/app/ui/Product/ProductsClientWrapper';
 
-export default function ProductsPage() {
+export const metadata = {
+    title: 'Products | Search Application',
+    description: 'Browse and search for products in our catalog',
+};
+
+export default async function ProductsPage({ searchParams }) {
+    const query = searchParams?.q || '';
+
+    const data = query
+        ? await searchProducts(query)
+        : await getAllProducts(20);
+
+    const products = data.products || [];
 
     return (
-        <Suspense fallback={
-            <div className="container mx-auto px-4 py-8 flex justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        <div className="container mx-auto px-4 py-8">
+            <div className="max-w-7xl mx-auto">
+                <ProductsClientWrapper
+                    initialProducts={products}
+                    initialQuery={query}
+                />
             </div>
-        }>
-            <ProductsContent />
-        </Suspense>
+        </div>
     );
 }
