@@ -1,4 +1,4 @@
-import { getProductById, getAllProductsStatic, getProductByIdStatic } from '@/app/lib/api';
+import {  getAllProductsStatic, getProductByIdStatic } from '@/app/lib/api';
 import ProductDetails from '@/app/ui/Product/ProductDetails';
 import { notFound } from 'next/navigation';
 
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
     const { id } = await params;
-    const product = await getProductById(id);
+    const product = await getProductByIdStatic(id);
 
     if (!product) {
         notFound();
