@@ -1,4 +1,4 @@
-import { getProductById, getAllProductsStatic } from '@/app/lib/api';
+import { getProductById, getAllProductsStatic, getProductByIdStatic } from '@/app/lib/api';
 import ProductDetails from '@/app/ui/Product/ProductDetails';
 import { notFound } from 'next/navigation';
 
@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
     const { id } = await params;
-    const product = await getProductById(id);
+    const product = await getProductByIdStatic(id);
 
     if (!product) {
         return {

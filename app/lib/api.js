@@ -64,3 +64,22 @@ export async function getAllProductsStatic(limit = 20) {
 
     return response.json();
 }
+export async function getProductByIdStatic(id) {
+    try {
+        const response = await fetch(`https://dummyjson.com/products/${id}`, {
+        next: { revalidate: 3600 }
+        });
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                return null;
+            }
+            throw new Error(`Failed to fetch product: ${response.status}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(`Error fetching product ${id}:`, error);
+        return null;
+    }
+}
