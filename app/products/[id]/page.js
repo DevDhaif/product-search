@@ -1,9 +1,9 @@
-import { getProductById, getAllProducts } from '@/app/lib/api';
+import { getProductById, getAllProductsStatic } from '@/app/lib/api';
 import ProductDetails from '@/app/ui/Product/ProductDetails';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
-    const data = await getAllProducts(20);
+    const data = await getAllProductsStatic(20);
 
     return (data.products || []).map((product) => ({
         id: product.id.toString(),
@@ -11,7 +11,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-    const product = await getProductById(params.id);
+    const { id } = await params;
+    const product = await getProductById(id);
 
     if (!product) {
         return {
@@ -38,7 +39,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProductPage({ params }) {
-    const product = await getProductById(params.id);
+    const { id } = await params;
+    const product = await getProductById(id);
 
     if (!product) {
         notFound();

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 const API_URL = 'https://dummyjson.com/products';
 export async function GET(request, { params }) {
-    const id = params.id;
+    const { id } = await params;
 
     try {
         const response = await fetch(`${API_URL}/${id}`);

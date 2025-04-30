@@ -7,7 +7,8 @@ export const metadata = {
 };
 
 export default async function ProductsPage({ searchParams }) {
-    const query = searchParams?.q || '';
+    const params = await searchParams;
+    const query = params?.q || '';
 
     const data = query
         ? await searchProducts(query)
